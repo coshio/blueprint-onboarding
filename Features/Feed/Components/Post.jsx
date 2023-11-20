@@ -1,13 +1,20 @@
-import React from 'react';
-import { View, Text } from 'react-native';
+import { Text } from 'react-native';
 import PropTypes from 'prop-types';
 
 export default function Post({ username, body }) {
   return (
-    <View>
-      <Text>{username}</Text>
-      <Text>{body}</Text>
-    </View>
+    <>
+      <Text>
+        Author:
+        {' '}
+        {username}
+      </Text>
+      <Text>
+        Body:
+        {' '}
+        {body}
+      </Text>
+    </>
   );
 }
 

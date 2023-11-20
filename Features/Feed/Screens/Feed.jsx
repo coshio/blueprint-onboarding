@@ -28,7 +28,9 @@ export default function Feed({ navigation }) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Posts</Text>
-      <Post username="coshio" body="Description of post" />
+      {GIVEN_POSTS.map((post) => (
+        <Post username={post.username} body={post.body} />
+      ))}
       <Button
         title="To Landing"
         onPress={navigateToLanding}
