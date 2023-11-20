@@ -1,8 +1,20 @@
 import { Button, Text, View } from 'react-native';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import Post from '../Components/Post';
+import NewPost from '../Components/NewPost';
 
 export default function Feed({ navigation }) {
+  const [posts, setPosts] = useState([]);
+  const [newId, setNewId] = useState(0);
+
+  const addPost = (newPost) => {
+    const allPosts = [...posts];
+    allPosts.push({ ...newPost, _id: newId });
+    setPosts(allPosts);
+    setNewId((id) => (id + 1));
+  };
+
   const GIVEN_POSTS = [
     {
       _id: 1,
@@ -28,7 +40,8 @@ export default function Feed({ navigation }) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Posts</Text>
-      {GIVEN_POSTS.map((post) => (
+      <NewPost addPost={addPost} />
+      {posts.map((post) => (
         <Post username={post.username} body={post.body} />
       ))}
       <Button
