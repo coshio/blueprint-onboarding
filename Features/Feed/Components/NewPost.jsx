@@ -5,9 +5,11 @@ import PropTypes from 'prop-types';
 export default function NewPost({ addPost }) {
   const [username, setUsername] = useState('');
   const [body, setBody] = useState('');
+  const [time, setTime] = useState(new Date().toISOString());
 
   const handlePost = () => {
-    addPost({ username, body });
+    setTime(new Date().toISOString());
+    addPost({ username, body, time });
     setUsername('');
     setBody('');
   };

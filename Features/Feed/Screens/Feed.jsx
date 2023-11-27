@@ -42,7 +42,7 @@ export default function Feed({ navigation }) {
       <Text>Posts</Text>
       <NewPost addPost={addPost} />
       {posts.map((post) => (
-        <Post username={post.username} body={post.body} />
+        <Post username={post.username} body={post.body} time={post.time} navigation={navigation} />
       ))}
       <Button
         title="To Landing"
