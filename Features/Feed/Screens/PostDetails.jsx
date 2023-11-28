@@ -7,7 +7,9 @@ export default function PostDetails({ route, navigation }) {
     navigation.navigate('Feed');
   };
 
-  const { username, body, time } = route.params;
+  const {
+    username, body, time, tag,
+  } = route.params;
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Post Details</Text>
@@ -26,6 +28,11 @@ export default function PostDetails({ route, navigation }) {
         {' '}
         {time}
       </Text>
+      <Text>
+        Tag:
+        {' '}
+        {tag}
+      </Text>
       <Button
         title="Back To Feed"
         onPress={navigateToFeed}
@@ -43,6 +50,7 @@ PostDetails.propTypes = {
       username: PropTypes.string.isRequired,
       body: PropTypes.string.isRequired,
       time: PropTypes.string.isRequired,
+      tag: PropTypes.string.isRequired,
     }),
   }).isRequired,
 };
