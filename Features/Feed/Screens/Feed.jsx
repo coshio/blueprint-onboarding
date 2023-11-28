@@ -10,6 +10,7 @@ export default function Feed({ navigation }) {
   const [posts, setPosts] = useState([]);
   const [newId, setNewId] = useState(0);
   const [sortMethod, setSortMethod] = useState('t_asc');
+  const [sortModalVisibility, setSortModalVisibility] = useState(false);
 
   const sortPosts = (method) => {
     switch (method) {
@@ -40,24 +41,6 @@ export default function Feed({ navigation }) {
     sortPosts(sortMethod);
   }, [sortMethod]);
 
-  const GIVEN_POSTS = [
-    {
-      _id: 1,
-      username: 'James',
-      body: 'Mobile development is fun!',
-    },
-    {
-      _id: 2,
-      username: 'Sidd',
-      body: 'I just finished watching another movie. It was interesting, but kind of boring :(',
-    },
-    {
-      _id: 3,
-      username: 'Jerry',
-      body: 'I am excited to see everyone become friends!',
-    },
-  ];
-
   const navigateToLanding = () => {
     navigation.navigate('Landing');
   };
@@ -65,17 +48,30 @@ export default function Feed({ navigation }) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       {posts.length > 1 && (
-        <Picker
-          style={{ height: 200, width: 300 }}
-          itemStyle={{ fontSize: 15 }}
-          selectedValue={sortMethod}
-          onValueChange={(itemValue) => setSortMethod(itemValue)}
-        >
-          <Picker.Item label="Ascending Time" value="t_asc" />
-          <Picker.Item label="Descending Time" value="t_des" />
-          <Picker.Item label="Ascending Username" value="u_asc" />
-          <Picker.Item label="Descending Username" value="u_des" />
-        </Picker>
+        <>
+          <Button
+            title="Sort/Filter Posts"
+            onPress={() => setSortModalVisibility(true)}
+          />
+          <Modal
+            isVisible={sortModalVisibility}
+            onBackdropPress={() => setSortModalVisibility(false)}
+          >
+            <View style={{ backgroundColor: 'white', borderRadius: 8, alignItems: 'center' }}>
+              <Picker
+                style={{ height: 200, width: 300 }}
+                itemStyle={{ fontSize: 15 }}
+                selectedValue={sortMethod}
+                onValueChange={(itemValue) => setSortMethod(itemValue)}
+              >
+                <Picker.Item label="Ascending Time" value="t_asc" />
+                <Picker.Item label="Descending Time" value="t_des" />
+                <Picker.Item label="Ascending Username" value="u_asc" />
+                <Picker.Item label="Descending Username" value="u_des" />
+              </Picker>
+            </View>
+          </Modal>
+        </>
       )}
       <Text>Posts</Text>
       <NewPost addPost={addPost} />
